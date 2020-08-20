@@ -6,9 +6,9 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Home: {
             screens: {
-              TabOneScreen: 'one',
+              HomeScreen: 'Home',
             },
           },
           TabTwo: {
@@ -18,7 +18,8 @@ export default {
           },
         },
       },
-      Login: "Login",
+      Login: 'Login',
+      Voting: 'Voting',
       NotFound: '*',
     },
   },

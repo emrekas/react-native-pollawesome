@@ -11,17 +11,25 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
-const LoginScreen = () => {
+const LoginScreen = (props: any) => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const emailValidate = (value: string) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // eslint-disable-next-line max-len
+    const re = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // eslint-disable-next-line no-empty
     if (re.test(String(email).toLowerCase())) {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => navigation.reset({
+    index: 0,
+    routes: [{ name: 'Root' }],
+  });
 
   return (
     <ImageBackground
@@ -65,6 +73,13 @@ const LoginScreen = () => {
                 onPress={handleSubmit}
               >
                 <Text style={styles.buttonText}>Login</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.button}
+                onPress={() => navigation.navigate('Voting')}
+              >
+                <Text style={styles.buttonText}>Voting</Text>
               </TouchableOpacity>
             </View>
           </View>

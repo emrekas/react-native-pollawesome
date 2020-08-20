@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { SafeAreaView } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
@@ -33,9 +35,11 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Navigation colorScheme={colorScheme} />
-      <StatusBar />
-    </SafeAreaView>
+    <PaperProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Navigation colorScheme={colorScheme} />
+        <StatusBar />
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
