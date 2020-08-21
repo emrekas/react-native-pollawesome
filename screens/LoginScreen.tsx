@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import MyButton from '../components/MyButton';
 
 const LoginScreen = (props: any) => {
   const navigation = useNavigation();
@@ -24,12 +25,15 @@ const LoginScreen = (props: any) => {
     // eslint-disable-next-line no-empty
     if (re.test(String(email).toLowerCase())) {
     }
+    setEmail(value);
   };
 
-  const handleSubmit = () => navigation.reset({
-    index: 0,
-    routes: [{ name: 'Root' }],
-  });
+  // const handleSubmit = () => navigation.reset({
+  //   index: 0,
+  //   routes: [{ name: 'Root' }],
+  // });
+
+  const handleSubmit = () => navigation.navigate('Root');
 
   return (
     <ImageBackground
@@ -67,20 +71,11 @@ const LoginScreen = (props: any) => {
                   onChangeText={(value: string) => setPassword(value)}
                 />
               </View>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.button}
-                onPress={handleSubmit}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.button}
-                onPress={() => navigation.navigate('Voting')}
-              >
-                <Text style={styles.buttonText}>Voting</Text>
-              </TouchableOpacity>
+              <MyButton
+                onPress={() => navigation.navigate('Root')}
+                text="Login"
+                iconName="login"
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>

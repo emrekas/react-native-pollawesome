@@ -61,6 +61,7 @@ function HomeNavigator() {
         options={{ headerTitle: 'Tab One Title' }}
       />
       <HomeStack.Screen
+        initialParams={{ itemId: 'ccccccccc' }}
         name="VotingNavigator"
         component={VotingStackNavigator}
       />

@@ -5,9 +5,9 @@ import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { SafeAreaView } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import RootNavigator from './navigation/index';
 
 const fetchFonts = () => Font.loadAsync({
   'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -16,7 +16,6 @@ const fetchFonts = () => Font.loadAsync({
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -37,7 +36,7 @@ export default function App() {
   return (
     <PaperProvider>
       <SafeAreaView style={{ flex: 1 }}>
-        <Navigation colorScheme={colorScheme} />
+        <RootNavigator />
         <StatusBar />
       </SafeAreaView>
     </PaperProvider>
