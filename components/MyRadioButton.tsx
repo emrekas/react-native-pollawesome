@@ -16,6 +16,8 @@ const MyRadioButton = (props: IProps) => (
     style={styles.radioButtonContainer}
   >
     <RadioButton
+      uncheckedColor="orange"
+      color="#d07001"
       value={props.value}
       status={props.checked === props.value ? 'checked' : 'unchecked'}
     />
@@ -28,10 +30,11 @@ export default MyRadioButton;
 const styles = StyleSheet.create({
   radioButtonContainer: {
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 2,
     marginVertical: 5,
     flexDirection: 'row',
     textAlignVertical: 'center',
+    borderRadius: 200,
   },
   text: { fontSize: 16, textAlignVertical: 'center' },
 });
