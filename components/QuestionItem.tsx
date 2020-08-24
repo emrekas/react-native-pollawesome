@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const getRandomColor = () => `rgb(${Math.floor(Math.random() * 230)},
                                   ${Math.floor(Math.random() * 150)},
@@ -13,18 +12,14 @@ const QuestionItem = (props: {
   id: string;
   createdBy: string;
   date: string;
+  onPress: Function;
 }) => {
-  const navigation = useNavigation();
   const color = getRandomColor();
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate('VotingNavigator', {
-        screen: 'VotingScreen',
-        params: { question: props },
-      })
-      }
+      onPress={() => props.onPress()}
       style={styles.item}
     >
       <View>
