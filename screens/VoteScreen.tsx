@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, View, Alert,
+} from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ActivityIndicator, Button } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import MyRadioButton from '../components/MyRadioButton';
 import { VoteList } from '../constants/DummyData';
 import MyButton from '../components/MyButton';
@@ -19,6 +21,17 @@ export default function VoteScreen() {
     );
     setVotes(votingList);
   }, []);
+
+  const submitVote = () => {
+    if (checked === '') {
+      Alert.alert('Oppps!!', 'Please select any option!');
+    } else {
+      navigation.navigate('ResultScreen', {
+        questionId: route.params?.question?.id,
+        voteId: checked,
+      });
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -39,20 +52,7 @@ export default function VoteScreen() {
         ) : (
           <ActivityIndicator size="large" color="orange" />
         )}
-        {/* <View style={styles.buttonContainer}>
-          <Button
-            color="black"
-            icon="checkbox-marked-outline"
-            style={styles.submitButton}
-          >
-            Vote
-          </Button>
-        </View> */}
-        <MyButton
-          onPress={() => navigation.navigate('Result')}
-          text="Vote"
-          iconName="vote"
-        />
+        <MyButton onPress={() => submitVote()} text="Vote" iconName="vote" />
       </ScrollView>
     </View>
   );
