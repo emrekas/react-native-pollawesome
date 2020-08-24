@@ -8,32 +8,31 @@ import {
   Platform,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MyButton from '../components/MyButton';
 
-const LoginScreen = (props: any) => {
+const LoginScreen = () => {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const emailValidate = (value: string) => {
+
+  const handleSubmit = () => {
     // eslint-disable-next-line max-len
     const re = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // eslint-disable-next-line no-empty
-    if (re.test(String(email).toLowerCase())) {
+    if (re.test(String(email).toLowerCase()) && password.length > 3) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Root' }],
+      });
+    } else {
+      Alert.alert('No no no noo!!', 'Email is not correct!');
     }
-    setEmail(value);
   };
-
-  // const handleSubmit = () => navigation.reset({
-  //   index: 0,
-  //   routes: [{ name: 'Root' }],
-  // });
-
-  const handleSubmit = () => navigation.navigate('Root');
 
   return (
     <ImageBackground
@@ -59,7 +58,7 @@ const LoginScreen = (props: any) => {
                   value={email}
                   placeholderTextColor="gray"
                   placeholder="Email"
-                  onChangeText={(value: string) => emailValidate(value)}
+                  onChangeText={(value: string) => setEmail(value)}
                 />
               </View>
               <View style={styles.input}>
@@ -72,7 +71,7 @@ const LoginScreen = (props: any) => {
                 />
               </View>
               <MyButton
-                onPress={() => navigation.navigate('Root')}
+                onPress={() => handleSubmit()}
                 text="Login"
                 iconName="login"
               />
