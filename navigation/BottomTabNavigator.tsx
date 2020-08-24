@@ -1,31 +1,30 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import React from 'react';
-
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, HomeParamList, TabTwoParamList } from '../types';
-import VotingStackNavigator from './VotingStackNavigator';
+import VoteScreen from '../screens/VoteScreen';
+import ResultScreen from '../screens/ResultScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      tabBarOptions={{ activeTintColor: 'orange' }}
     >
       <BottomTab.Screen
         name="Home"
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="md-home" color={color} />
           ),
         }}
       />
@@ -34,7 +33,7 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="md-person" color={color} />
           ),
         }}
       />
@@ -54,16 +53,26 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeNavigator() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      initialRouteName="HomeScreen"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{ headerTitle: 'Questions' }}
       />
       <HomeStack.Screen
-        initialParams={{ itemId: 'ccccccccc' }}
-        name="VotingNavigator"
-        component={VotingStackNavigator}
+        name="VoteScreen"
+        options={{ headerTitle: 'Answers' }}
+        component={VoteScreen}
+      />
+      <HomeStack.Screen
+        name="ResultScreen"
+        options={{ headerTitle: 'Result' }}
+        component={ResultScreen}
       />
     </HomeStack.Navigator>
   );

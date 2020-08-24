@@ -11,11 +11,15 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  VotingNavigator: { itemId: string };
+  // VotingNavigator: { itemId: string };
+  VoteScreen: { itemId: string };
+  ResultScreen: { voteId: string };
 };
 
 export type VotingParamList = {
-  VotingScreen: { itemId: string };
+  HomeScreen: undefined;
+  VoteScreen: { itemId: string };
+  ResultScreen: { voteId: string };
 };
 
 export type TabTwoParamList = {
