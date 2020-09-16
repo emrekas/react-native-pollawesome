@@ -24,7 +24,7 @@ const LoginScreen = () => {
     // eslint-disable-next-line max-len
     const re = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // eslint-disable-next-line no-empty
-    if (re.test(String(email).toLowerCase()) && password.length > 3) {
+    if (!re.test(String(email).toLowerCase()) && password.length > 3) {
       navigation.reset({
         index: 0,
         routes: [{ name: 'Root' }],

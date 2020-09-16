@@ -28,7 +28,7 @@ export default function VoteScreen() {
     } else {
       navigation.navigate('ResultScreen', {
         questionId: route.params?.question?.id,
-        voteId: checked,
+        answerId: checked,
       });
     }
   };
